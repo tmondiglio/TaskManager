@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gestor de tareas con funcionalidad de texto a voz">
+    <title>Taskmgr</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/task.png">
+</head>
+<body>
+    <header class="header">
+        <button class="menu-icon" aria-label="Abrir menú">☰</button>
+        <h1>Taskmgr</h1>
+        <button class="btn btn-primary" id="newTaskBtn" aria-label="Crear nueva tarea">Nueva Tarea</button>
+    </header>
+
+    <main class="container" id="taskContainer" aria-label="Lista de tareas">
+       
+    </main>
+
+    <!-- Modal Nueva Tarea -->
+    <dialog id="newTaskDialog" aria-labelledby="newTaskTitle">
+        <div class="dialog-header">
+            <h2 id="newTaskTitle">Nueva Tarea</h2>
+            <button class="close-button" onclick="this.closest('dialog').close()" aria-label="Cerrar">×</button>
+        </div>
+        <div class="dialog-content">
+            <form id="newTaskForm">
+                <div class="form-group">
+                    <label for="newTaskTitle">Título</label>
+                    <input type="text" id="newTaskTitle" name="taskTitle" placeholder="Título de la tarea" required>
+                </div>
+                <div class="form-group">
+                    <label for="newTaskDetail">Detalle</label>
+                    <textarea id="newTaskDetail" name="taskDetail" placeholder="Detalle de la tarea" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="newTaskStatus">Estado</label>
+                    <select id="newTaskStatus" name="taskStatus" required>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en-proceso">En Proceso</option>
+                        <option value="completada">Completada</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="this.closest('dialog').close()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Modal Filtros -->
+    <dialog id="filterDialog" aria-labelledby="filterTitle">
+        <div class="dialog-header">
+            <h2 id="filterTitle">Filtrar por Estado</h2>
+            <button class="close-button" onclick="this.closest('dialog').close()" aria-label="Cerrar">×</button>
+        </div>
+        <div class="dialog-content">
+            <div class="form-group" role="group" aria-label="Filtros de estado">
+                <button class="btn btn-primary" data-status="all">Todas</button>
+                <button class="btn btn-primary" data-status="pendiente">Pendientes</button>
+                <button class="btn btn-primary" data-status="en-proceso">En Proceso</button>
+                <button class="btn btn-primary" data-status="completada">Completadas</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Modal Configuración -->
+    <dialog id="configDialog" aria-labelledby="configTitle">
+        <div class="dialog-header">
+            <h2 id="configTitle">Configuración de Audio</h2>
+            <button class="close-button" onclick="this.closest('dialog').close()" aria-label="Cerrar">×</button>
+        </div>
+        <div class="dialog-content">
+            <form id="configForm">
+                <div class="form-group">
+                    <label for="language">Idioma</label>
+                    <select id="language" name="language" required>
+                        <option value="es-ES">Español</option>
+                        <option value="en-US">English</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rate">Velocidad de reproducción</label>
+                    <input type="range" id="rate" name="rate" min="-0.9" max="1.2" step="0.1" value="1">
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <!-- Modal Editar Tarea -->
+    <dialog id="editTaskDialog" aria-labelledby="editTaskTitle">
+        <div class="dialog-header">
+            <h2 id="editTaskTitle">Editar Tarea</h2>
+            <button class="close-button" onclick="this.closest('dialog').close()" aria-label="Cerrar">×</button>
+        </div>
+        <div class="dialog-content">
+            <form id="editTaskForm">
+                <div class="form-group">
+                    <label for="editTaskTitle">Título</label>
+                    <input type="text" id="editTaskTitle" name="taskTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTaskDetail">Detalle</label>
+                    <textarea id="editTaskDetail" name="taskDetail" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editTaskStatus">Estado</label>
+                    <select id="editTaskStatus" name="taskStatus" required>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en-proceso">En Proceso</option>
+                        <option value="completada">Completada</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="this.closest('dialog').close()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+    <script type="module" src="services/TaskManagement.js"></script>
+</body>
+</html>
